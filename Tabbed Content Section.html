@@ -1,0 +1,326 @@
+### `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tabbed Content</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="tabs-section">
+
+        <h1>Tabbed Content</h1>
+
+        <div class="tabs-container">
+
+            <!-- Tab Buttons -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="overview">
+                    Overview
+                </button>
+
+                <button class="tab-btn" data-tab="info">
+                    Info
+                </button>
+
+                <button class="tab-btn" data-tab="contact">
+                    Contact
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+
+            <div class="tab-content active" id="overview">
+                <h2>Overview</h2>
+                <p>
+                    Welcome to our website. This section provides a
+                    quick overview of our services and features.
+                </p>
+
+                <ul>
+                    <li>Easy to use</li>
+                    <li>Modern design</li>
+                    <li>Responsive layout</li>
+                </ul>
+            </div>
+
+            <div class="tab-content" id="info">
+                <h2>Information</h2>
+                <p>
+                    We provide high-quality solutions designed to
+                    meet the needs of modern users.
+                </p>
+
+                <ul>
+                    <li>Professional services</li>
+                    <li>Customer-focused approach</li>
+                    <li>Reliable support</li>
+                </ul>
+            </div>
+
+            <div class="tab-content" id="contact">
+                <h2>Contact Us</h2>
+                <p>
+                    Have questions? Feel free to contact us.
+                </p>
+
+                <div class="contact-info">
+                    <p><strong>Email:</strong> example@email.com</p>
+                    <p><strong>Phone:</strong> +91 98765 43210</p>
+                    <p><strong>Location:</strong> Hyderabad, India</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
+
+### `style.css`
+
+```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+}
+
+.tabs-section {
+    width: 100%;
+    max-width: 800px;
+}
+
+.tabs-section > h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+    font-size: 32px;
+}
+
+.tabs-container {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabs */
+
+.tabs {
+    display: flex;
+
+    background: #f1f1f1;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    flex: 1;
+
+    padding: 18px 20px;
+
+    border: none;
+    background: transparent;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    color: #666;
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease;
+}
+
+.tab-btn:hover {
+    background: #e8e8e8;
+    color: #333;
+}
+
+/* Active Tab */
+
+.tab-btn.active {
+    color: #667eea;
+    background: white;
+}
+
+/* Active underline */
+
+.tab-btn.active::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 3px;
+
+    background: #667eea;
+
+    border-radius: 5px;
+}
+
+/* Tab Content */
+
+.tab-content {
+    display: none;
+
+    padding: 35px;
+
+    opacity: 0;
+
+    transform: translateY(10px);
+}
+
+/* Active content */
+
+.tab-content.active {
+    display: block;
+
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Animation */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content h2 {
+    color: #333;
+
+    margin-bottom: 15px;
+}
+
+.tab-content p {
+    color: #666;
+
+    line-height: 1.7;
+
+    margin-bottom: 15px;
+}
+
+.tab-content ul {
+    margin-left: 20px;
+
+    color: #555;
+
+    line-height: 2;
+}
+
+.contact-info {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f5f6ff;
+
+    border-radius: 10px;
+}
+
+.contact-info p {
+    margin-bottom: 8px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 600px) {
+
+    .tabs-section > h1 {
+        font-size: 26px;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        padding: 14px;
+    }
+
+    .tab-btn.active::after {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .tab-content {
+        padding: 25px 20px;
+    }
+}
+```
+
+### `script.js`
+
+```javascript
+const tabButtons = document.querySelectorAll(".tab-btn");
+const tabContents = document.querySelectorAll(".tab-content");
+
+tabButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        // Remove active class from all buttons
+        tabButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        // Remove active class from all contents
+        tabContents.forEach(content => {
+            content.classList.remove("active");
+        });
+
+        // Activate clicked button
+        button.classList.add("active");
+
+        // Get the target content
+        const targetId = button.getAttribute("data-tab");
+
+        const targetContent =
+            document.getEl
+```
